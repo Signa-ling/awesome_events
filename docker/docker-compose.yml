@@ -18,6 +18,8 @@ services:
     environment:
       SELENIUM_DRIVER_URL: http://selenium_chrome:4444/wd/hub
       ELASTICSEARCH_URL: http://elasticsearch:9200/
+    env_file:
+      - ../.env
 
   elasticsearch:
     build:
