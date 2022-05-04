@@ -19,6 +19,8 @@ jobs:
         shell: bash
         env:
           RAILS_ENV: test
+          CLIENT_ID: ${{secrets.CLIENT_ID}}
+          CLIENT_SECLET: ${{secrets.CLIENT_SECRET}}
         run: |
           docker compose -f ./docker/docker-compose.yml exec -T app bundle install --jobs 4 --retry 3
           docker compose -f ./docker/docker-compose.yml exec -T app bin/rails db:create
