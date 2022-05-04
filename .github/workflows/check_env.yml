@@ -1,0 +1,27 @@
+name: Rails Tests
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build
+        shell: bash
+        env:
+          RAILS_ENV: test
+        run: |
+          docker compose -f ./docker/docker-compose.yml up --build -d
+      - name: Container check
+        shell: bash
+        env:
+          RAILS_ENV: test
+          CLIENT_ID: ${{secrets.CLIENT_ID}}
+          CLIENT_SECLET: ${{secrets.CLIENT_SECRET}}
+        run: |
+          echo "==================="
+          docker compose -f ./docker/docker-compose.yml exec -T -e CLIENT_ID CLIENT_SECRET app env
+          echo "==================="
