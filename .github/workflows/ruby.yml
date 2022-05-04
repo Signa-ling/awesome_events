@@ -9,15 +9,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Build
+      - name: create .env
         shell: bash
         run: |
           touch .env
           echo "CLIENT_ID=${{secrets.CLIENT_ID}}" >> .env 
           echo "CLIENT_SECRET=${{secrets.CLIENT_SECRET}}" >> .env
           echo "RAILS_ENV=test" >> .env
-      - name:
-          docker compose -f ./docker/docker-compose.yml up --build -d
+      - name: Build
+        shell: bash
+        run: docker compose -f ./docker/docker-compose.yml up --build -d
       - name: Container Setup
         shell: bash
         run: |
