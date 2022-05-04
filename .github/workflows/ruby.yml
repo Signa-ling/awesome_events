@@ -26,6 +26,7 @@ jobs:
           docker compose -f ./docker/docker-compose.yml exec -T app bin/rails db:create
           docker compose -f ./docker/docker-compose.yml exec -T app bin/rails db:migrate
           docker compose -f ./docker/docker-compose.yml exec -T app bin/yarn install
+          docker compose -f ./docker/docker-compose.yml exec -T app bin/rails r Event.reindex
       - name: RUN test
         shell: bash
         run: |
