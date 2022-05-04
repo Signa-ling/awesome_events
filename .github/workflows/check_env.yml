@@ -26,5 +26,5 @@ jobs:
         shell: bash
         run: |
           echo "==================="
-          docker compose -f ./docker/docker-compose.yml exec -T -e app env
+          docker compose -f ./docker/docker-compose.yml exec -T app env
           echo "==================="
